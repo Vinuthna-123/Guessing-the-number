@@ -1,0 +1,79 @@
+package Guess;
+import javax.swing.*;
+import java.util.*;
+public class GuessGame {
+	private static final int YES_OPTION=0;
+	player p1; //in which assessing the player class
+	public void startGame() {
+		 int guess=0;
+		 boolean p1isRight=false;
+		 int guessp1 = 0;
+		 
+		 int targetNum =(int)(Math.random()*10);
+		 		 JOptionPane.showMessageDialog(null,"Try to guess a number between 0 and 9");
+		 		 
+		 		 while(true) {
+       p1 = new player();
+		 			 p1.guess();
+		 			 
+		 			 guessp1 = p1.num;
+		 			 if(guessp1==targetNum) {
+		 				 p1isRight = true;	 
+		 			 }
+		 			 if(p1isRight) {
+		 				 JOptionPane.showMessageDialog(null,"ooh wonderful you entered the right value\n and the value you entered is :"+p1isRight+"congratulations");
+		 			 	 break;
+		 			 }
+		 			 else {
+		 				 JOptionPane.showMessageDialog(null, "sory the guess is failed! please try again");
+		 				 int count1 = p1.count;
+           if(count1 >=3) { 
+		 					 JOptionPane.showConfirmDialog(null, "sorry you entered more than the no. of times expected\n the target no. was "+ targetNum+"would you like to play the game again?",null,YES_OPTION);
+		 					 System.exit(0);
+		 				 }
+		 			 } 
+		 		 }
+
+}
+}
+// creating the another class player
+
+	public class player {
+		int num =0;
+		int count=0;
+		
+		public void guess() {
+			//Tell user to enter a value
+			while(true) {
+				static count++;
+				String number=JOptionPane.showInputDialog("please enter a number value");
+				
+				if(number.isEmpty()) {
+					JOptionPane.showMessageDialog(null,"oops!yopu must enter a value");
+					break;
+				}else {
+					try {
+					     num=Integer.parseInt(number);
+					     if(num>9) {
+					    	 JOptionPane.showMessageDialog(null,"sorry,the no. you enter is greater than the guessed value.\nplease enter other no.");
+	        
+					     }
+						
+					
+				}catch (NumberFormatException e) {
+		JOptionPane.showMessageDialog(null,"only integer values are allowed.please restart the  game");
+    				break;
+				  }
+				}
+				break;
+			}
+		}
+	}
+
+public class gamelauncer {
+	public static void main(String[]args) {
+GuessGame game = new GuessGame();
+game.startGame();
+}
+}
+
